@@ -1,1 +1,168 @@
-@import '~bootstrap/scss/bootstrap'
+@use './variables' as *;
+@use './mixins' as *;
+@import '~bootstrap/scss/bootstrap';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.my-container {
+    max-width: 1070px;
+    margin: auto;
+}
+
+img {
+    max-width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.my-bg-blue{
+background-color: $blue;
+}
+
+.nav-bar {
+    height: 100px;
+    @include dflex('between');
+
+    .logo-img {
+        width: 90px
+    }
+
+    .links {
+        @include dflex();
+
+        li {
+            line-height: 97px;
+            padding: 0 0.7rem;
+            border-bottom: 3px solid transparent;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+
+            &.active {
+                a {
+                    color: $blue;
+                }
+            }
+
+            &.active,
+            &:hover {
+                border-bottom: 3px solid $blue;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.jumbo {
+    background-image: url('/resources/img/jumbotron.jpg');
+    background-size: cover;
+    height: 400px;
+    position: relative;
+
+    .title {
+        position: absolute;
+        bottom: 0px;
+        transform: translate(0, 50%);
+        padding: 0.8rem;
+        background-color: $blue;
+        @include myText(1rem, bold);
+    }
+}
+
+main {
+    background-color: $dark-dc;
+
+    .inner-main {
+        padding: 2rem 0;
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -1rem;
+            padding-bottom: 1rem;
+
+            .flip-card {
+                width: calc(100% / 6);
+                height: 285px;
+                padding: 0.5rem;
+                background-color: white;
+                border: 4px solid $dark-dc;
+                perspective: 1000px;
+                border-radius: 1rem;
+
+                .flip-card-inner {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    text-align: center;
+                    transition: transform 1s;
+                    transform-style: preserve-3d;
+
+                    .flip-card-front,
+                    .flip-card-back {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        -webkit-backface-visibility: hidden;
+                        backface-visibility: hidden;
+
+                    }
+
+                    .flip-card-back {
+                        transform: rotateY(180deg);
+                    }
+                }
+
+                &:hover .flip-card-inner {
+                    transform: rotateY(180deg);
+                }
+
+                .title {
+                    @include myText(0.9rem);
+                    color: black;
+                }
+
+                .img-box {
+                    height: 200px;
+                    overflow: hidden;
+                    margin-bottom: 0.5rem;
+                }
+
+            }
+        }
+    }
+}
+
+footer{
+    background-image: url('../img/footer-bg.jpg');
+    .nav-bar-footer {
+            @include dflex();
+
+            .button {
+                border: 2px solid $blue;
+                width: max-content;
+                padding: 1rem;
+                transition: scale 0.7s;
+
+                &:hover {
+                    cursor: pointer;
+                    scale: 0.9;
+                }
+            }
+    }
+}
+
